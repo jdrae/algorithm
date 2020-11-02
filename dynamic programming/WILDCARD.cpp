@@ -12,7 +12,7 @@ int func(int w, int s) {
     int& ret = cache[w][s];
     if (ret != -1) return ret;
     while (w < W.size() && s < S.size()
-            && (W[w] == S[w] || W[w] == '?') ) {
+            && (W[w] == S[s] || W[w] == '?') ) {
         return ret = func(w + 1, s + 1);
     }
 
