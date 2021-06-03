@@ -46,6 +46,21 @@ int findElement(TreeType* T, int k){
     else return w->key;
 }
 
+void rFindAllInRange(TreeNode* v, int k1, int k2){
+    if(isExternal(v)) return;
+    if(k1 <= v->key && v->key < k2){
+        printf("[%d] ", v->key);
+    }
+    if(v->key <= k1)
+        rFindAllInRange(v->right, k1, k2);
+    else if(k2 <= v->key)
+        rFindAllInRange(v->left, k1, k2);
+    else{
+        rFindAllInRange(v->left, k1, k2);
+        rFindAllInRange(v->right, k1, k2);
+    }
+}
+
 void preOrder(TreeNode* root){
     if(isExternal(root)) return;
     printf("[%d] ", root->key);
@@ -224,4 +239,6 @@ int main(){
     insertItem(T, 62);
     insertItem(T, 54);
     preOrder(T->root); printf("\n");
+
+    rFindAllInRange(T->root, 50, 80);
 }
