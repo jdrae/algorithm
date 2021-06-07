@@ -64,6 +64,26 @@ void insertIncidentEdge(Vertex* v, int av, Edge* e){
 
 }
 
+void insertDirectionEdges(int v1, int v2){
+    Edge* p = (Edge*)malloc(sizeof(Edge));
+    p->vNum1 = v1;
+    p->vNum2 = v2;
+    p->isTree = 0;
+    p->next = NULL;
+    Edge* q = eHead;
+
+    if(q==NULL)
+        eHead = p;
+    else{
+        while(q->next!=NULL)
+            q = q->next;
+        q->next = p;
+    }
+
+    Vertex* v = findVertex(v1);
+    insertIncidentEdge(v, v2, p);
+}
+
 void insertEdges(int v1, int v2){
     Edge* p = (Edge*)malloc(sizeof(Edge));
     p->vNum1 = v1;
