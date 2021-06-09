@@ -5,11 +5,13 @@ typedef struct Edge{
     int vNum1;
     int vNum2;
     int isTree;
+    int weight;
     struct Edge* next;
 }Edge;
 
 typedef struct IncidentEdge{
     int adjVertex;
+    int weight;
     Edge* e;
     struct IncidentEdge* next;
 }IncidentEdge;
@@ -52,6 +54,7 @@ void insertIncidentEdge(Vertex* v, int av, Edge* e){
     IncidentEdge* p = (IncidentEdge*)malloc(sizeof(IncidentEdge));
     p->adjVertex = av;
     p->e = e;
+    p->weight = e->weight;
     p->next = NULL;
     IncidentEdge* q = v->top;
     if(q==NULL)
@@ -63,6 +66,28 @@ void insertIncidentEdge(Vertex* v, int av, Edge* e){
     }
 
 }
+
+void insertWeightedEdges(int v1, int v2, int w){
+    Edge* p = (Edge*)malloc(sizeof(Edge));
+    p->vNum1 = v1;
+    p->vNum2 = v2;
+    p->weight = w;
+    p->isTree = 0;
+    p->next = NULL;
+    Edge* q = eHead;
+
+    if(q==NULL)
+        eHead = p;
+    else{
+        while(q->next!=NULL)
+            q = q->next;
+        q->next = p;
+    }
+
+    Vertex* v = findVertex(v1);
+    insertIncidentEdge(v, v2, p);
+}
+
 
 void insertDirectionEdges(int v1, int v2){
     Edge* p = (Edge*)malloc(sizeof(Edge));
@@ -112,7 +137,7 @@ void print(){
     for(; p!=NULL; p=p->next){
         printf("Vertex %d: ", p->num);
         for(q=p->top; q!=NULL; q=q->next){
-            printf("[%d] ", q->adjVertex);
+            printf("[%d (%d)] ", q->adjVertex, q->weight);
         }
         printf("\n");
     }
