@@ -21,21 +21,38 @@ void merge(int a, int b){
     k--;
 }
 
-void print(int level){
-    printf("===P %d k %d\n", level, k);
-    for(int i = 0; i<p.size(); i++){
-        printf("%d %d\n", i, p[i]);
+void union_find(){
+    int qSize = q.size();
+    for(int qs = 0; qs<qSize;qs++){
+        int currx= q.front().first, curry = q.front().second;
+        q.pop(); q.push({currx, curry});
+        for(int i = 0; i<4; i++){
+            int nx = currx + dx[i]; int ny = curry + dy[i];
+            if(0<=nx && nx < n && 0<=ny && ny < n){
+                if(arr[ny][nx] != 0){
+                    merge(arr[curry][currx], arr[ny][nx]);
+                }
+            }
+        }
     }
-    printf("\n");
 }
 
-void parr(){
-    printf("===ARR\n");
-    for(int i = 0; i<n; i++){
-        for(int j = 0; j<n; j++){
-            printf("%d ", arr[i][j]);
+void spread(){
+    int qSize = q.size();
+    for(int qs = 0; qs<qSize;qs++){
+        int currx= q.front().first, curry = q.front().second;
+        q.pop();
+        for(int i = 0; i<4; i++){
+            int nx = currx + dx[i]; int ny = curry + dy[i];
+            if(0<=nx && nx < n && 0<=ny && ny < n){
+                if(arr[ny][nx] == 0){
+                    q.push({nx,ny});
+                } else{
+                    merge(arr[curry][currx], arr[ny][nx]);
+                }
+                arr[ny][nx] = arr[curry][currx];
+            }
         }
-        printf("\n");
     }
 }
 
@@ -50,48 +67,13 @@ int main(){
         p[i] = -1;
     }
     int level = 0;
-
-    // check initial union
-    for(int qs = 0; qs<k;qs++){
-        int currx= q.front().first, curry = q.front().second;
-        q.pop(); q.push({currx, curry});
-        for(int i = 0; i<4; i++){
-            int nx = currx + dx[i]; int ny = curry + dy[i];
-            if(0<=nx && nx < n && 0<=ny && ny < n){
-                if(arr[ny][nx] != 0){
-                    merge(arr[curry][currx], arr[ny][nx]);
-                }
-            }
-        }
-    }
-    if(k == 1)
-        goto answer;
-
-    // process 
-    while(!q.empty()){
-        int qSize = q.size();
-        for(int qs = 0; qs<qSize;qs++){
-            int currx= q.front().first, curry = q.front().second;
-            q.pop();
-            for(int i = 0; i<4; i++){
-                int nx = currx + dx[i]; int ny = curry + dy[i];
-                if(0<=nx && nx < n && 0<=ny && ny < n){
-                    if(arr[ny][nx] == 0){
-                        q.push({nx,ny});
-                    } else{
-                        merge(arr[curry][currx], arr[ny][nx]);
-                    }
-                    arr[ny][nx] = arr[curry][currx];
-                }
-            }
-        }
-        parr();
-        print(level);
-        level++;
+    while(k > 1){
+        union_find();
         if(k==1) break;
+        spread();
+        level++;
     }
-    answer:
-        printf("%d\n", level);
+    printf("%d", level);
 }
 
 /**

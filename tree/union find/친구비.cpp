@@ -11,7 +11,7 @@ int find(int a){
 
 void merge(int a, int b){
     a = find(a); b = find(b);
-    if(a==b) return; // becareful
+    if(a==b) return; // tip
     if(arr[a] <= arr[b]) p[b] = a;
     else p[a] = b;
 }

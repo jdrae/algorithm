@@ -20,11 +20,11 @@ int main(){
     int tc; scanf("%d",&tc);
     while(tc--){
         int f; scanf("%d", &f);
-        unordered_map<string, int> m; // becareful
+        unordered_map<string, int> m; // tip
         fill(p, p+MAX, -1);
         int n = 0;
         while(f--){
-            char a[21], b[21]; scanf("%s %s", a, b); // becareful
+            char a[21], b[21]; scanf("%s %s", a, b); // tip
             if(m.count(a) == 0) m[a] = n++;
             if(m.count(b) == 0) m[b] = n++;
 
