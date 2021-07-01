@@ -17,13 +17,16 @@ void dijkstra(const vector<P> adj[], int dist[], int start){ // tip
     dist[start] = 0;
     pq.push({0, start});
     while(!pq.empty()){
-        int curr = pq.top().second;
-        int d = -pq.top().first;
-        if(dist[curr] < d) continue;
-        
+        int curr;
+        do{
+            curr =  pq.top().second;
+            pq.pop();
+        }while(!pq.empty() && visited[curr]);
+        if(visited[curr]) break;
+
         for(int i = 0; i<adj[curr].size(); i++){
             int nxt = adj[curr][i].first; 
-            int nd = adj[curr][i].second + d;
+            int nd = adj[curr][i].second + dist[curr];
             if(dist[nxt] > nd){
                 dist[nxt] = nd;
                 pq.push({-dist[nxt], nxt});
