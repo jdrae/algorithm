@@ -33,15 +33,15 @@ int main(){
                     if(dist[j] != INF && dist[nxt]>d){
                         dist[nxt] = d;
                         if(i==n-1){
-                            in_cycle[i] = true; // tip: 음의 사이클을 포함하는 경로
+                            in_cycle[i] = true; // tip: ??
                             q.push(i);
                         }
                     }
                 }
             }
         }
-        // bfs: 음의 사이클을 지나는 정점들로만 bfs 진행
-        bool result = (dist[0] < 0); // 양수면 false, while 문 실행 안됨
+        // bfs: 음의 사이클을 지나는 정점들로만 bfs 진행 ?
+        bool result = (dist[0] < 0);
         while(!q.empty()){
             int curr = q.front(); q.pop();
             if(curr == 0){
@@ -60,3 +60,14 @@ int main(){
         printf("Case #%d: %s\n", t, result ? "possible" : "not possible");
     }
 }
+
+/*
+n 번의 수행으로 dist[0] < 0 이 되지 않지만 possible 인 경우 
+1
+4 5
+0 1 7
+1 0 7
+1 3 -1
+3 2 -2
+2 1 -3
+*/
