@@ -1,23 +1,12 @@
 #include <iostream>
 #include <algorithm>
-#include <cstring>
+#include <vector>
+#include <queue>
 using namespace std;
-
-int n;
-int* arr;
+const int MAX = 100;
 
 int main(){
     ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-    cin >> n;
-    arr = new int[n](); // initialize with 0
-    for(int i = 0; i<n; i++)
-        cin >> arr[i];
-
-
-
-    for(int i = 0; i<n; i++)
-        cout << arr[i];
-    delete[] arr;
 }

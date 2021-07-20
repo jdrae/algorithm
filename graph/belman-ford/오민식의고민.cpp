@@ -23,7 +23,7 @@ int main(){
         visit[i][i] = 1;
     }
 
-    // tip: 임의의 정점에서 다른 정점으로 방문 가능한지 파악
+    // tip: 임의의 정점에서 다른 정점으로 방문 가능한지 파악(플로이드)
     for(int k = 0; k<n; k++)
         for(int i = 0; i<n; i++)
             for(int j = 0; j<n; j++)
