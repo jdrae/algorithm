@@ -9,7 +9,7 @@ def solution(begin, target, words):
     n = len(words)
     adj = [ [0 for j in range(n)] for i in range(n) ]
     
-    wtoi = {k: v for v,k in enumerate(words)}
+    wtoi = {k: v for v,k in enumerate(words)} # tip: 문자열에 인덱스 붙이기
     
     for i in range(n):
         for j in range(n):
