@@ -3,6 +3,7 @@
 #include <sstream>
 using namespace std;
 
+// tip: c++ split
 vector<string> split(const string& str, char del){
     vector<string> ret;
     stringstream ss(str);
@@ -38,7 +39,7 @@ int solution(vector<string> lines) {
         if(dur.find(".") != string::npos)
             dur.replace(dur.find("."),1,"");
         int end = unix_time(spl[1]);
-        int start = unix_time(spl[1]) - (stoi(dur) * 1000);
+        int start = unix_time(spl[1]) - (stoi(dur) * 1000) + 1;
         log.push_back({start, end});
     }
     
