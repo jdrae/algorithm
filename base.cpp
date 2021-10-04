@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <queue>
+#include <cstring>
 using namespace std;
 const int MAX = 100;
 
