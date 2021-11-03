@@ -3,14 +3,15 @@
 #include <cstring>
 #include <queue>
 using namespace std;
-const int MAX = 800;
-const int INF = 800 * 1000;
 typedef pair<int,int> P;
+typedef long long ll;
+const int MAX = 800;
+const ll INF = 800 * 1000 * 10;
 vector<P> adj[MAX];
-int dist[MAX];
+ll dist[MAX];
 int n, e;
 
-int dijkstra(int start, int end){
+ll dijkstra(int start, int end){
     bool visited[MAX] = {0};
     priority_queue<P, vector<P>, greater<P>> pq;
     
@@ -27,7 +28,8 @@ int dijkstra(int start, int end){
 
         visited[curr] = true;
         for(auto &p : adj[curr]){
-            int nxt = p.second, d = p.first;
+            int nxt = p.second;
+            ll d = p.first;
             if(dist[nxt] > dist[curr] + d){
                 dist[nxt] = dist[curr] + d;
                 pq.push(P(dist[nxt], nxt));
@@ -38,7 +40,7 @@ int dijkstra(int start, int end){
     return dist[end];
 }
 
-int makepath(int v1, int v2){
+ll makepath(int v1, int v2){
     return dijkstra(0, v1) + dijkstra(v1, v2) + dijkstra(v2, n-1);
 }
 
@@ -55,7 +57,7 @@ int main(){
     cin >> v1 >> v2;
     v1--; v2--;
     
-    int ans = min(makepath(v1, v2), makepath(v2, v1));
+    ll ans = min(makepath(v1, v2), makepath(v2, v1));
     if(ans >= INF) ans = -1;
     cout << ans << endl;
 }
