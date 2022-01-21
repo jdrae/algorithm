@@ -1,29 +1,30 @@
 n = 9
 arr = [list(map(int,input().split())) for _ in range(n)]
 
-pairs = []
-for i in range(n):
-    for j in range(n):
-        if not arr[i][j]:
-            pairs.append((i,j))
-m = len(pairs)
+pair = []
+for i in range(9):
+    for j in range(9):
+        if arr[i][j] == 0:
+            pair.append((i,j))
 
+m = len(pair)
 def backtrack(pos):
-    if pos == m:
+    if pos == m: 
         return True
-    y, x = pairs[pos][0], pairs[pos][1]
+    y, x = pair[pos][0], pair[pos][1]
     chk = set([1,2,3,4,5,6,7,8,9])
-    cand = set([1,2,3,4,5,6,7,8,9])
     # 행
     tmp = set([])
     for j in range(n):
         tmp.add(arr[y][j])
-    cand &= (chk - tmp)
+    cand = chk - tmp
+
     # 열
     tmp = set([])
     for i in range(n):
         tmp.add(arr[i][x])
     cand &= (chk - tmp)
+
     # 칸
     tmp = set([])
     r, c = (y//3)*3, (x//3)*3
@@ -35,7 +36,7 @@ def backtrack(pos):
     for c in cand:
         arr[y][x] = c
         if backtrack(pos+1):
-           return True
+            return True
         arr[y][x] = 0 
     return False
 

@@ -4,17 +4,14 @@ n = m
 if n > 9:
     n = (n-9)//2 + 9
 
-found = False
 ans = [0] * n
 used = [False] * (n+1)
 def backtrack(pos, s):
-    global found
     if pos == n:
-        if found: return
         for u in used[1:]:
-            found = u
+            if not u: return False
         print(*ans, sep=" ")
-        return
+        return True
     for i in (1,2):
         e = s+i
         if e > m: break
@@ -23,7 +20,8 @@ def backtrack(pos, s):
         if used[num]: continue
         ans[pos] = num
         used[num] = True
-        backtrack(pos+1, e)
+        if backtrack(pos+1, e):
+            return True
         ans[pos] = 0
         used[num] = False
 
