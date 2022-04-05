@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿// binary search/가장긴증가하는부분수열2.py 참고
+
+#include <iostream>
 #include <cstring>
 #include <algorithm>
 using namespace std;
