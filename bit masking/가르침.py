@@ -11,6 +11,9 @@ else:
     k -= 5
     chars = {'a','n','t','i','c'}
     # tip: 알파벳-숫자 대응 딕셔너리
+    # alpha = {chr(v+ord('a')):v for v in range(26)}
+    
+    # chars 를 제외한 딕셔너리
     alpha = {ky: v 
         for v, ky in enumerate( 
         set( map(chr, range(ord('a'), ord('z')+1)) ) - chars
