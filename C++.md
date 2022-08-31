@@ -79,3 +79,10 @@ pow(base, n);
 sqrt(x);
 hypot(a, b); // sqrt(abs(a)^2 + abs(b)^2)
 ```
+
+## 최소, 최댓값
+```
+#include <limits.h>
+
+INT_MIN, INT_MAX
+```
